@@ -1,27 +1,20 @@
 const menuContainer = document.getElementById("menu");
 
 const products = [
-    { nombre: "Príncipe", precio: 15 },
-    { nombre: "Cazares", precio: 8 },
-    { nombre: "Vero", precio: 3 },
-    { nombre: "Hershey's", precio: 3 },
-    { nombre: "Pelón", precio: 8 },
-    { nombre: "Muecas", precio: 8 },
-    { nombre: "Kit Kat", precio: 15 },
-    { nombre: "Trident", precio: 3 },
-    { nombre: "Kinder", precio: 8 },
-    { nombre: "Winis", precio: 5 },
-    { nombre: "Mazapán", precio: 5 },
-    { nombre: "Papas Sol", precio: 18 },
-    { nombre: "Muibon", precio: 5 },
+    { precio: 15, imagen: "imagen1.svg" },
+    { precio: 8, imagen: "/Imagenes/Cazares.png" },
+    { precio: 3, imagen: "imagen3.svg" },
+    // ... Agrega otros productos aquí ...
+    { precio: 5, imagen: "/Imagenes/Mazapan.svg" },
+    // ... Agrega otros productos aquí ...
 ];
 
 products.forEach(product => {
     const productElement = document.createElement("div");
     productElement.classList.add("product");
     productElement.innerHTML = `
-        <h3>${product.nombre}</h3>
-        <p>Precio: $${product.precio}</p>
+        <img src="${product.imagen}" alt="Producto" class="product-image">
+        <p class="price">Precio: $${product.precio}</p>
     `;
     menuContainer.appendChild(productElement);
 });
