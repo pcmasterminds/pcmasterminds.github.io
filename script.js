@@ -1,10 +1,11 @@
 const menuContainer = document.getElementById("menu");
 
 const products = [
-    { precio: 15, imagen: "imagen1.svg" },
+    { precio: 15, imagen: "/Imagenes/KitKat.svg" },
+    { precio: 8, imagen: "/Imagenes/Lucas.png" },
     { precio: 8, imagen: "/Imagenes/Cazares.png" },
-    { precio: 3, imagen: "imagen3.svg" },
-    // ... Agrega otros productos aquí ...
+    { precio: 3, imagen: "/Imagenes/Vero.png" },
+    { precio: 8, imagen: "/Imagenes/Pelon.png" },
     { precio: 5, imagen: "/Imagenes/Mazapan.svg" },
     // ... Agrega otros productos aquí ...
 ];
