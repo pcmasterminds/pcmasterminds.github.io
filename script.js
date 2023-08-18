@@ -11,7 +11,7 @@ const products = [
     { nombre: "Trident", precio: 3 },
     { nombre: "Kinder", precio: 8 },
     { nombre: "Winis", precio: 5 },
-    { nombre: "Mazapan", precio: 5 },
+    { nombre: "Mazapán", precio: 5 },
     { nombre: "Papas Sol", precio: 18 },
     { nombre: "Muibon", precio: 5 },
 ];
