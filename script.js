@@ -1,13 +1,19 @@
 const menuContainer = document.getElementById("menu");
 
 const products = [
-    { precio: 15, imagen: "/Imagenes/KitKat.svg" },
-    { precio: 8, imagen: "/Imagenes/Lucas.png" },
-    { precio: 8, imagen: "/Imagenes/Cazares.png" },
-    { precio: 3, imagen: "/Imagenes/Vero.png" },
-    { precio: 8, imagen: "/Imagenes/Pelon.png" },
-    { precio: 5, imagen: "/Imagenes/Mazapan.svg" },
-    // ... Agrega otros productos aquí ...
+    { precio: 8, imagen: "/Images/Cazares.png" },
+    { precio: 3, imagen: "/Images/Hersheys.png" },
+    { precio: 8, imagen: "/Images/Kinder.png" },
+    { precio: 15, imagen: "/Images/KitKat.svg" },
+    { precio: 8, imagen: "/Images/Lucas.png" },
+    { precio: 5, imagen: "/Images/Mazapan.svg" },
+    { precio: 5, imagen: "/Images/Muibon.png" },
+    { precio: 18, imagen: "Images/Sol.svg" },
+    { precio: 8, imagen: "/Images/Pelon.png" },
+    { precio: 15, imagen: "/Images/Principe.png" },
+    { precio: 3, imagen: "/Images/Trident.png" },
+    { precio: 3, imagen: "/Images/Vero.png" },
+    { precio: 5, imagen: "/Images/Winis.png" },
 ];
 
 products.forEach(product => {
