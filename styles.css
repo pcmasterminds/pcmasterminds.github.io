@@ -10,7 +10,7 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #FFF8EE;
+    background-color: #FFF5E1; /* Blanco crema */
     color: #333;
     margin: 0;
 }
@@ -18,32 +18,33 @@ body {
 .container {
     max-width: 900px;
     margin: 0 auto;
-    padding: 60px 20px;
+    padding: 40px 20px;
     text-align: center;
 }
 
 .title {
-    color: #FF8A65;
-    font-size: 48px;
+    color: #8B4513; /* Marrón chocolate */
+    font-size: 36px;
     letter-spacing: 1px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     text-transform: uppercase;
 }
 
 .menu {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
 }
 
 .product {
-    background-color: #FFD699;
+    background-color: #F5DEB3; /* Beige */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 40px;
+    padding: 20px;
     text-align: center;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    position: relative;
 }
 
 .product:hover {
@@ -51,37 +52,32 @@ body {
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
-.product h3 {
-    color: #444;
-    font-size: 28px;
-    margin-bottom: 15px;
+.product img {
+    max-width: 100%;
+    max-height: 100px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-5px);
+    }
 }
 
 .price {
-    color: #FF8A65;
-    font-size: 24px;
+    color: #B8860B; /* Dorado tostado */
+    font-size: 18px;
     margin: 10px 0;
 }
 
-.product-image {
-    max-width: 100px;
-    margin: 0 auto 20px;
-}
-
-.accent-color-1 {
-    color: #FFB74D;
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.accent-color-2 {
-    color: #FF8A65;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.accent-color-3 {
-    color: #FF7043;
+.accent-color {
+    color: #FFD700; /* Amarillo vainilla */
     font-size: 16px;
     font-weight: 700;
 }
