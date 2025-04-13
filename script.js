@@ -29,6 +29,12 @@ function processText() {
     output = "⚠️ Error al procesar el texto. Verifica el formato.";
   }
 
+  // Limitar el ancho del texto decodificado para evitar desbordamientos
+  const outputElement = document.getElementById("output-text");
+  outputElement.style.whiteSpace = "pre-wrap"; // Mantener saltos de línea
+  outputElement.style.overflowWrap = "break-word"; // Ajustar palabras largas
+  outputElement.style.wordWrap = "break-word"; // Compatibilidad con navegadores antiguos
+
   animateText(output);
 }
 
@@ -54,17 +60,20 @@ function copyToClipboard() {
   outputElement.focus();
   outputElement.select();
 
-  navigator.clipboard.writeText(outputText).then(() => {
-    const toast = document.getElementById("toast");
-    toast.classList.add("show");
+  navigator.clipboard
+    .writeText(outputText)
+    .then(() => {
+      const toast = document.getElementById("toast");
+      toast.classList.add("show");
 
-    setTimeout(() => {
-      toast.classList.remove("show");
-    }, 3000); // El mensaje desaparece después de 3 segundos
-  }).catch(err => {
-    console.error("Error al copiar el texto: ", err);
-    alert("⚠️ No se pudo copiar el texto. Intenta nuevamente.");
-  });
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3000); // El mensaje desaparece después de 3 segundos
+    })
+    .catch((err) => {
+      console.error("Error al copiar el texto: ", err);
+      alert("⚠️ No se pudo copiar el texto. Intenta nuevamente.");
+    });
 }
 
 // Asegurarse de que el evento esté correctamente registrado
