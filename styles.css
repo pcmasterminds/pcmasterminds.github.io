@@ -1,303 +1,310 @@
 /* Diseño general */
 body {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    background: #000;
-    color: chartreuse;
-    overflow-x: hidden;
-    font-size: 16px;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  background: #000;
+  color: chartreuse;
+  overflow-x: hidden;
+  font-size: 16px;
 }
 
 .container {
-    max-width: 100%;
-    margin: auto;
-    padding: 20px;
-    text-align: center;
-    box-sizing: border-box;
+  max-width: 100%;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  box-sizing: border-box;
+  overflow-x: hidden; /* Evitar desbordamientos horizontales */
 }
 
 h1.glitch {
-    font-size: 36px;
-    position: relative;
-    animation: glitch 1s infinite;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    word-wrap: break-word;
+  font-size: 36px;
+  position: relative;
+  animation: glitch 1s infinite;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  word-wrap: break-word;
 }
 
 h1.glitch::before,
 h1.glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    color: chartreuse;
-    background: #000;
-    overflow: hidden;
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: chartreuse;
+  background: #000;
+  overflow: hidden;
 }
 
 h1.glitch::before {
-    left: 2px;
-    text-shadow: -2px 0 red;
-    animation: glitchTop 1s infinite;
+  left: 2px;
+  text-shadow: -2px 0 red;
+  animation: glitchTop 1s infinite;
 }
 
 h1.glitch::after {
-    left: -2px;
-    text-shadow: -2px 0 blue;
-    animation: glitchBottom 1s infinite;
+  left: -2px;
+  text-shadow: -2px 0 blue;
+  animation: glitchBottom 1s infinite;
 }
 
 p.glow {
-    font-size: 18px;
-    color: #0f0;
-    text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
-    margin-bottom: 20px;
-    word-wrap: break-word;
+  font-size: 18px;
+  color: #0f0;
+  text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
+  margin-bottom: 20px;
+  word-wrap: break-word;
 }
 
 /* Textareas */
 textarea {
-    width: 100%;
-    height: 150px;
-    margin: 10px 0;
-    padding: 15px;
-    background: #111;
-    color: chartreuse;
-    border: 2px solid chartreuse;
-    border-radius: 10px;
-    font-size: 16px;
-    resize: vertical;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    box-sizing: border-box;
+  width: 100%;
+  height: 150px;
+  margin: 10px 0;
+  padding: 15px;
+  background: #111;
+  color: chartreuse;
+  border: 2px solid chartreuse;
+  border-radius: 10px;
+  font-size: 16px;
+  resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+  overflow-wrap: break-word; /* Forzar ajuste de palabras largas */
+  word-wrap: break-word; /* Compatibilidad con navegadores antiguos */
+  white-space: pre-wrap; /* Mantener saltos de línea */
 }
 
 textarea:focus {
-    border-color: #ff0000;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  border-color: #ff0000;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }
 
 /* Botones */
 button {
-    padding: 12px 20px;
-    background: #111;
-    color: chartreuse;
-    border: 2px solid chartreuse;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    font-weight: 700;
+  padding: 12px 20px;
+  background: #111;
+  color: chartreuse;
+  border: 2px solid chartreuse;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  font-weight: 700;
+  max-width: 100%; /* Asegurarse de que no se desborde */
 }
 
 button:hover {
-    background: #ff0000;
-    color: #fff;
-    border-color: #ff0000;
+  background: #ff0000;
+  color: #fff;
+  border-color: #ff0000;
 }
 
 button:focus {
-    outline: none;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+  outline: none;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
 }
 
 /* Contenedor del botón y el toast */
 .copy-wrapper {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 /* Estilo del toast */
 #toast {
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    transform: translateY(-50%);
-    background: #28a745;
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 8px;
-    opacity: 0;
-    transition: opacity 0.5s ease, left 0.5s ease;
-    z-index: 1000;
-    font-weight: 700;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  background: #28a745;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.5s ease, left 0.5s ease;
+  z-index: 1000;
+  font-weight: 700;
 }
 
 #toast.show {
-    opacity: 1;
-    left: 105%;
+  opacity: 1;
+  left: 105%;
 }
 
 /* Barra de acción */
 .action-bar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
 }
 
 .button-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
 }
 
 /* Footer con efecto Glassmorphism */
 footer {
-    background: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
-    -webkit-backdrop-filter: blur(10px); /* Prefijo para navegadores WebKit */
-    backdrop-filter: blur(10px); /* Desenfoque en el fondo para el efecto Glassmorphism */
-    padding: 20px;
-    text-align: center;
-    color: chartreuse;
-    font-size: 14px;
-    border-top: 2px solid #444; /* Borde sutil para separar el footer */
-    margin-top: 20px;
-    border-radius: 10px; /* Bordes redondeados para suavizar el diseño */
-    box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+  -webkit-backdrop-filter: blur(10px); /* Prefijo para navegadores WebKit */
+  backdrop-filter: blur(
+    10px
+  ); /* Desenfoque en el fondo para el efecto Glassmorphism */
+  padding: 20px;
+  text-align: center;
+  color: chartreuse;
+  font-size: 14px;
+  border-top: 2px solid #444; /* Borde sutil para separar el footer */
+  margin-top: 20px;
+  border-radius: 10px; /* Bordes redondeados para suavizar el diseño */
+  box-sizing: border-box;
 }
 
 footer p {
-    font-size: 14px;
-    margin: 0;
+  font-size: 14px;
+  margin: 0;
 }
 
 footer a {
-    color: chartreuse;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease, transform 0.3s ease;
+  color: chartreuse;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 footer a:hover {
-    color: #ff0000;
-    transform: scale(1.05); /* Efecto de aumento */
+  color: #ff0000;
+  transform: scale(1.05); /* Efecto de aumento */
 }
 
 footer a:focus {
-    outline: 2px dashed chartreuse;
-    outline-offset: 4px;
+  outline: 2px dashed chartreuse;
+  outline-offset: 4px;
 }
 
 /* Media Queries para dispositivos móviles */
 @media (max-width: 768px) {
-    .container {
-        padding: 15px;
-    }
+  .container {
+    padding: 15px;
+  }
 
-    h1.glitch {
-        font-size: 28px;
-        letter-spacing: 3px;
-    }
+  h1.glitch {
+    font-size: 28px;
+    letter-spacing: 3px;
+  }
 
-    p.glow {
-        font-size: 16px;
-    }
+  p.glow {
+    font-size: 16px;
+  }
 
-    textarea {
-        font-size: 14px;
-    }
+  textarea {
+    font-size: 14px;
+  }
 
-    button {
-        padding: 10px 15px;
-        font-size: 14px;
-    }
+  button {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
 
-    footer {
-        font-size: 12px;
-    }
+  footer {
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 480px) {
-    .container {
-        padding: 10px;
-    }
+  .container {
+    padding: 10px;
+  }
 
-    h1.glitch {
-        font-size: 24px;
-        letter-spacing: 2px;
-    }
+  h1.glitch {
+    font-size: 24px;
+    letter-spacing: 2px;
+  }
 
-    p.glow {
-        font-size: 14px;
-    }
+  p.glow {
+    font-size: 14px;
+  }
 
-    textarea {
-        font-size: 12px;
-    }
+  textarea {
+    font-size: 12px;
+  }
 
-    button {
-        padding: 8px 12px;
-        font-size: 12px;
-    }
+  button {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
 
-    footer {
-        font-size: 12px;
-    }
+  footer {
+    font-size: 12px;
+  }
 }
 
 /* Animaciones */
 @keyframes glitch {
-    0% {
-        transform: none;
-    }
-    20% {
-        transform: skew(-0.5deg, -0.9deg);
-    }
-    40% {
-        transform: skew(0.8deg, -0.1deg);
-    }
-    60% {
-        transform: skew(-0.3deg, 0.4deg);
-    }
-    80% {
-        transform: skew(0.5deg, -0.8deg);
-    }
-    100% {
-        transform: none;
-    }
+  0% {
+    transform: none;
+  }
+  20% {
+    transform: skew(-0.5deg, -0.9deg);
+  }
+  40% {
+    transform: skew(0.8deg, -0.1deg);
+  }
+  60% {
+    transform: skew(-0.3deg, 0.4deg);
+  }
+  80% {
+    transform: skew(0.5deg, -0.8deg);
+  }
+  100% {
+    transform: none;
+  }
 }
 
 @keyframes glitchTop {
-    0% {
-        clip-path: inset(0 0 100% 0);
-    }
-    10% {
-        clip-path: inset(10px 0 80% 0);
-    }
-    20% {
-        clip-path: inset(5px 0 85% 0);
-    }
-    30% {
-        clip-path: inset(20px 0 70% 0);
-    }
-    40% {
-        clip-path: inset(0 0 90% 0);
-    }
-    100% {
-        clip-path: inset(0 0 100% 0);
-    }
+  0% {
+    clip-path: inset(0 0 100% 0);
+  }
+  10% {
+    clip-path: inset(10px 0 80% 0);
+  }
+  20% {
+    clip-path: inset(5px 0 85% 0);
+  }
+  30% {
+    clip-path: inset(20px 0 70% 0);
+  }
+  40% {
+    clip-path: inset(0 0 90% 0);
+  }
+  100% {
+    clip-path: inset(0 0 100% 0);
+  }
 }
 
 @keyframes glitchBottom {
-    0% {
-        clip-path: inset(0 0 100% 0);
-    }
-    10% {
-        clip-path: inset(30px 0 70% 0);
-    }
-    20% {
-        clip-path: inset(15px 0 85% 0);
-    }
-    30% {
-        clip-path: inset(5px 0 95% 0);
-    }
-    40% {
-        clip-path: inset(25px 0 75% 0);
-    }
-    100% {
-        clip-path: inset(0 0 100% 0);
-    }
+  0% {
+    clip-path: inset(0 0 100% 0);
+  }
+  10% {
+    clip-path: inset(30px 0 70% 0);
+  }
+  20% {
+    clip-path: inset(15px 0 85% 0);
+  }
+  30% {
+    clip-path: inset(5px 0 95% 0);
+  }
+  40% {
+    clip-path: inset(25px 0 75% 0);
+  }
+  100% {
+    clip-path: inset(0 0 100% 0);
+  }
 }
