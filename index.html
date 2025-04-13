@@ -1,17 +1,48 @@
 <!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dulcería de Lalo</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Codificador Base64</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <div class="container">
-        <h1 class="title">CandyLandia por Lalo</h1>
-        <div id="menu" class="menu">
-            <!-- Los productos se cargarán aquí dinámicamente -->
+      <h1 class="glitch" data-text="Codificador Base64">Codificador Base64</h1>
+      <p class="glow">Convierte tu texto a Base64 o decodifícalo fácilmente</p>
+      <textarea
+        id="input-text"
+        placeholder="Escribe tu texto aquí..."
+      ></textarea>
+      <div class="action-bar">
+        <p id="mode-indicator">Modo: Codificar</p>
+        <div class="button-group">
+          <button type="button" onclick="processText()">Procesar</button>
+          <button type="button" onclick="toggleAction()" id="toggle-btn">
+            Cambiar a Decodificar
+          </button>
+          <div class="copy-wrapper">
+            <button type="button" onclick="copyToClipboard()" id="copy-btn">
+              Copiar Resultado
+            </button>
+            <div id="toast">¡Texto copiado!</div>
+          </div>
         </div>
+      </div>
+      <textarea
+        id="output-text"
+        placeholder="Resultado..."
+        readonly="readonly"
+      ></textarea>
     </div>
+    <footer>
+      <p>
+        Hecho por
+        <a href="https://github.com/dannlefevregtz" target="_blank"
+          >dannlefevregtz</a
+        >
+      </p>
+    </footer>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
