@@ -1,48 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Codificador Base64</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1 class="glitch" data-text="Codificador Base64">Codificador Base64</h1>
-      <p class="glow">Convierte tu texto a Base64 o decodifícalo fácilmente</p>
-      <textarea
-        id="input-text"
-        placeholder="Escribe tu texto aquí..."
-      ></textarea>
-      <div class="action-bar">
-        <p id="mode-indicator">Modo: Codificar</p>
-        <div class="button-group">
-          <button type="button" onclick="processText()">Procesar</button>
-          <button type="button" onclick="toggleAction()" id="toggle-btn">
-            Cambiar a Decodificar
-          </button>
-          <div class="copy-wrapper">
-            <button type="button" onclick="copyToClipboard()" id="copy-btn">
-              Copiar Resultado
-            </button>
-            <div id="toast">¡Texto copiado!</div>
-          </div>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Descuentos</title>
+    <meta name="description"
+        content="Calcula fácil y rápido el descuento de cualquier producto. ¡Ahorra en tus compras!">
+    <meta name="author" content="dannlefevregtz">
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pcmasterminds.github.io">
+    <meta property="og:title" content="Calculadora de Descuentos">
+    <meta property="og:description"
+        content="Calcula fácil y rápido el descuento de cualquier producto. ¡Ahorra en tus compras!">
+    <meta property="og:image" content="/Image">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://pcmasterminds.github.io">
+    <meta name="twitter:title" content="Calculadora de Descuentos">
+    <meta name="twitter:description"
+        content="Calcula fácil y rápido el descuento de cualquier producto. ¡Ahorra en tus compras!">
+    <meta name="twitter:image" content="/Image">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+    <main class="container">
+        <h1>Calculadora de Descuentos</h1>
+
+        <div class="calculator">
+            <div class="input-group">
+                <label for="precio">Precio Original</label>
+                <div class="input-wrapper">
+                    <span class="currency">$</span>
+                    <input type="text" id="precio" placeholder="0.00" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="descuento">Porcentaje de Descuento</label>
+                <div class="input-wrapper">
+                    <input type="text" id="descuento" placeholder="0" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*">
+                    <span class="percentage">%</span>
+                </div>
+            </div>
+
+            <button id="calcular" class="btn-calculate">Calcular Descuento</button>
+
+            <div class="results" id="resultados">
+                <div class="result-item">
+                    <span class="label">Descuento:</span>
+                    <span class="value" id="valorDescuento">$0.00</span>
+                </div>
+                <div class="result-item">
+                    <span class="label">Precio Final:</span>
+                    <span class="value" id="precioFinal">$0.00</span>
+                </div>
+            </div>
         </div>
-      </div>
-      <textarea
-        id="output-text"
-        placeholder="Resultado..."
-        readonly="readonly"
-      ></textarea>
-    </div>
-    <footer>
-      <p>
-        Hecho por
-        <a href="https://github.com/dannlefevregtz" target="_blank"
-          >dannlefevregtz</a
-        >
-      </p>
-    </footer>
+    </main>
     <script src="script.js"></script>
-  </body>
+</body>
+
 </html>
