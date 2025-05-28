@@ -1,80 +1,200 @@
-let mode = "codificar";
+const precioInput = document.getElementById('precio');
+const descuentoInput = document.getElementById('descuento');
+const calcularBtn = document.getElementById('calcular');
+const valorDescuentoElement = document.getElementById('valorDescuento');
+const precioFinalElement = document.getElementById('precioFinal');
+const themeToggle = document.getElementById('themeToggle');
+const calculator = document.querySelector('.calculator');
 
-function toggleAction() {
-  const btn = document.getElementById("toggle-btn");
-  const modeText = document.getElementById("mode-indicator");
+const formatearMoneda = (valor) => {
+    return new Intl.NumberFormat('es-MX', {
+        style: 'currency',
+        currency: 'MXN',
+        minimumFractionDigits: 2
+    }).format(valor);
+};
 
-  if (mode === "codificar") {
-    mode = "decodificar";
-    btn.innerText = "Cambiar a Codificar";
-  } else {
-    mode = "codificar";
-    btn.innerText = "Cambiar a Decodificar";
-  }
+const validarEntrada = (input) => {
+    let valor = input.value;
+    valor = valor.replace(',', '.');
+    valor = valor.replace(/[^\d.]/g, '');
 
-  modeText.innerText = `Modo: ${mode.charAt(0).toUpperCase() + mode.slice(1)}`;
-}
-
-function processText() {
-  const input = document.getElementById("input-text").value;
-  let output = "";
-
-  try {
-    if (mode === "codificar") {
-      output = btoa(unescape(encodeURIComponent(input)));
-    } else {
-      output = decodeURIComponent(escape(atob(input)));
+    const partes = valor.split('.');
+    if (partes.length > 2) {
+        valor = partes[0] + '.' + partes.slice(1).join('');
     }
-  } catch (err) {
-    output = "⚠️ Error al procesar el texto. Verifica el formato.";
-  }
 
-  // Limitar el ancho del texto decodificado para evitar desbordamientos
-  const outputElement = document.getElementById("output-text");
-  outputElement.style.whiteSpace = "pre-wrap"; // Mantener saltos de línea
-  outputElement.style.overflowWrap = "break-word"; // Ajustar palabras largas
-  outputElement.style.wordWrap = "break-word"; // Compatibilidad con navegadores antiguos
+    if (valor === '' || valor === '.') {
+        input.value = '';
+        return false;
+    }
 
-  animateText(output);
-}
+    const numero = parseFloat(valor);
+    if (isNaN(numero) || numero < 0) {
+        input.value = '';
+        return false;
+    }
 
-function animateText(text) {
-  let t = document.getElementById("output-text");
-  t.value = "";
-  let n = 0;
-  !(function o() {
-    n < text.length && ((t.value += text.charAt(n)), n++, setTimeout(o, 50));
-  })();
-}
+    input.value = valor;
+    return true;
+};
 
-function copyToClipboard() {
-  const outputText = document.getElementById("output-text").value;
+const animarNumero = (elemento, valorInicial, valorFinal, duracion = 1000) => {
+    const inicio = performance.now();
+    const diferencia = valorFinal - valorInicial;
 
-  if (outputText.trim() === "") {
-    alert("⚠️ No hay texto para copiar."); // Mensaje de alerta para el usuario
-    return;
-  }
+    const animar = (tiempoActual) => {
+        const tiempoTranscurrido = tiempoActual - inicio;
+        const progreso = Math.min(tiempoTranscurrido / duracion, 1);
+        const easeOutQuart = 1 - Math.pow(1 - progreso, 4);
+        const valorActual = valorInicial + (diferencia * easeOutQuart);
 
-  // Asegurarse de que el elemento esté visible y enfocado
-  const outputElement = document.getElementById("output-text");
-  outputElement.focus();
-  outputElement.select();
+        elemento.textContent = formatearMoneda(valorActual);
 
-  navigator.clipboard
-    .writeText(outputText)
-    .then(() => {
-      const toast = document.getElementById("toast");
-      toast.classList.add("show");
+        if (progreso < 1) {
+            requestAnimationFrame(animar);
+        }
+    };
 
-      setTimeout(() => {
-        toast.classList.remove("show");
-      }, 3000); // El mensaje desaparece después de 3 segundos
-    })
-    .catch((err) => {
-      console.error("Error al copiar el texto: ", err);
-      alert("⚠️ No se pudo copiar el texto. Intenta nuevamente.");
+    requestAnimationFrame(animar);
+};
+
+const crearParticulas = (x, y) => {
+    const particulas = document.createElement('div');
+    particulas.className = 'particula';
+    document.body.appendChild(particulas);
+
+    const size = Math.random() * 10 + 5;
+    const destinationX = (Math.random() - 0.5) * 200;
+    const destinationY = (Math.random() - 0.5) * 200;
+
+    particulas.style.cssText = `
+        position: fixed;
+        left: ${x}px;
+        top: ${y}px;
+        width: ${size}px;
+        height: ${size}px;
+        background: var(--gradient-1);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+    `;
+
+    const animacion = particulas.animate([
+        { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+        { transform: `translate(${destinationX}px, ${destinationY}px) scale(0)`, opacity: 0 }
+    ], {
+        duration: 1000,
+        easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
     });
+
+    animacion.onfinish = () => particulas.remove();
+};
+
+const calcularDescuento = (event) => {
+    if (!validarEntrada(precioInput) || !validarEntrada(descuentoInput)) {
+        return;
+    }
+
+    const precio = parseFloat(precioInput.value);
+    const descuento = parseFloat(descuentoInput.value);
+
+    if (descuento > 100) {
+        descuentoInput.value = '100';
+        return;
+    }
+
+    const valorDescuento = (precio * descuento) / 100;
+    const precioFinal = precio - valorDescuento;
+
+    if (event) {
+        const rect = event.target.getBoundingClientRect();
+        for (let i = 0; i < 10; i++) {
+            crearParticulas(
+                rect.left + rect.width / 2,
+                rect.top + rect.height / 2
+            );
+        }
+    }
+
+    calculator.style.transform = 'scale(1.05)';
+    setTimeout(() => {
+        calculator.style.transform = 'scale(1)';
+    }, 300);
+
+    animarNumero(valorDescuentoElement, 0, valorDescuento);
+    setTimeout(() => {
+        animarNumero(precioFinalElement, 0, precioFinal);
+    }, 500);
+
+    const resultados = document.getElementById('resultados');
+    resultados.style.animation = 'none';
+    resultados.offsetHeight;
+    resultados.style.animation = 'fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+};
+
+const toggleTheme = () => {
+    const body = document.body;
+    const isDark = body.getAttribute('data-theme') === 'dark';
+
+    body.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+
+    if (isDark) {
+        body.removeAttribute('data-theme');
+        themeToggle.textContent = '🌙';
+        themeToggle.style.transform = 'rotate(0deg)';
+    } else {
+        body.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️';
+        themeToggle.style.transform = 'rotate(180deg)';
+    }
+
+    const rect = themeToggle.getBoundingClientRect();
+    for (let i = 0; i < 8; i++) {
+        crearParticulas(
+            rect.left + rect.width / 2,
+            rect.top + rect.height / 2
+        );
+    }
+};
+
+calcularBtn.addEventListener('click', calcularDescuento);
+themeToggle.addEventListener('click', toggleTheme);
+
+[precioInput, descuentoInput].forEach(input => {
+    input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            calcularDescuento();
+        }
+    });
+
+    input.addEventListener('focus', () => {
+        input.parentElement.style.transform = 'translateY(-2px)';
+    });
+
+    input.addEventListener('blur', () => {
+        input.parentElement.style.transform = 'translateY(0)';
+    });
+});
+
+[precioInput, descuentoInput].forEach(input => {
+    input.addEventListener('input', () => {
+        validarEntrada(input);
+    });
+});
+
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+if (prefersDarkScheme.matches) {
+    document.body.setAttribute('data-theme', 'dark');
+    themeToggle.textContent = '☀️';
 }
 
-// Asegurarse de que el evento esté correctamente registrado
-document.getElementById("copy-btn").addEventListener("click", copyToClipboard);
+document.querySelectorAll('.result-item').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        item.style.transform = 'translateX(5px) scale(1.02)';
+    });
+
+    item.addEventListener('mouseleave', () => {
+        item.style.transform = 'translateX(0) scale(1)';
+    });
+});
