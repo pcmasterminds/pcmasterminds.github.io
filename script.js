@@ -198,3 +198,10 @@ document.querySelectorAll('.result-item').forEach(item => {
         item.style.transform = 'translateX(0) scale(1)';
     });
 });
+
+// Registrar service worker (PWA)
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('✔️ Service Worker registrado'))
+        .catch(err => console.error('❌ Error SW', err));
+}
