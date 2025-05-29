@@ -1,6 +1,6 @@
 {
-  "name": "Cafetería POO",
-  "short_name": "Café POO",
+  "name": "Calculadora Descuentos | ",
+  "short_name": "Calculadora Descuentos | ",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
