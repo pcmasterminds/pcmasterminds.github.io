@@ -2,7 +2,7 @@ const CACHE_NAME = "calculadora dannlefevregtz";
 const urlsToCache = [
   "./",
   "./index.html",
-  "./style.css",
+  "./styles.css",
   "./script.js",
   "./manifest.json",
   "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
