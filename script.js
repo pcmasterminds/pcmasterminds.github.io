@@ -205,3 +205,27 @@ if ('serviceWorker' in navigator) {
         .then(() => console.log('✔️ Service Worker registrado'))
         .catch(err => console.error('❌ Error SW', err));
 }
+
+// Lógica para instalar la PWA
+let deferredPrompt;
+const installBtn = document.getElementById('installPWA');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = 'block';
+});
+
+installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+            console.log('PWA instalada');
+        } else {
+            console.log('PWA no instalada');
+        }
+        installBtn.style.display = 'none';
+        deferredPrompt = null;
+    }
+});
