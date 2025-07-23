@@ -229,17 +229,3 @@ installBtn.addEventListener('click', async () => {
         deferredPrompt = null;
     }
 });
-
-// Mostrar mensaje alternativo en Firefox y Safari
-const altInstallMsg = document.getElementById('altInstallMsg');
-const isFirefox = navigator.userAgent.toLowerCase().includes('firefox');
-const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-if (!('onbeforeinstallprompt' in window) || isFirefox || isSafari) {
-    // Solo mostrar si NO es Chrome/Edge/Brave/Opera y la app es PWA
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            altInstallMsg.style.display = 'block';
-        }, 1200);
-    });
-}
